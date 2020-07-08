@@ -46,58 +46,18 @@ export class HomePage {
 
       reader.onload = async (res: any) => {
         this.imgSrc = res.target.result;
-        // console.log(this.imgSrc);
         setTimeout(async () => {
         	let image = <HTMLImageElement> document.getElementById("imge");
-        // console.log(image);
-    //     let tensor = tf.browser.fromPixels(image)
-    // .resizeNearestNeighbor([224, 224])
-    // .toFloat()
-    // .expandDims();
-    // console.log(tensor);
-        this.loading = true;
-        const loading = await this.loadingController.create({
-          message: 'Loading Result...',
-        });
-        await loading.present();
-        this.pred = await this.model.predict(this.preprocess(image)).dataSync();
-        await loading.dismiss();
-        // const pred1 = await this.model.predict(this.preprocess(image)).argmax(1);
-        // const pred = await this.model.predict(tensor).dataSync();
-        // console.log(pred);
-        // console.log(pred1);
-    }, 100);
-        
-        // const pred = await this.model.classify(this.preprocess(image));
-        // console.log(pred);
-        // await tf.image(this.imgSrc, [224,224]);
-        // const pred = await this.model.classify(this.imgSrc);
-        // console.log(pred);
-        // console.log("thiss");
-  //       let tensor = tf.tensor(this.imgSrc,[1]);
-		// console.log(tensor);
-		// const pred = await this.model.predict(this.imgSrc);
-  //       console.log(pred);
-
+          this.loading = true;
+          const loading = await this.loadingController.create({
+            message: 'Loading Result...',
+          });
+          await loading.present();
+          this.pred = await this.model.predict(this.preprocess(image)).dataSync();
+          await loading.dismiss();
+        }, 100);
       };
-      // console.log(this);
-//       let image = <any> document.getElementById("img");
-//       console.log(image);
-// let tensor = tf.browser.fromPixels(image)
-//     .resizeNearestNeighbor([224, 224])
-//     .toFloat()
-//     .expandDims();
-//     console.log(tensor);
-
-
-
     }
-
-
-
-// tf.io.decode_base64(
-//     this.imgSrc, name=None
-// )
   }
 
   preprocess(imgData: HTMLImageElement) {
