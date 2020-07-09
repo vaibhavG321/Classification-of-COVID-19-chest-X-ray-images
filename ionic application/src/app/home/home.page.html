@@ -38,8 +38,8 @@
         <ion-col size-xs="12" size-sm="6">
           <ion-item align-self-center *ngIf="imgSrc">
             <!-- <ion-img style="height: 400px; width: 300px;" src="{{imgSrc}}"></ion-img> -->
-            <ion-text>Congratulation! Uploaded image is a mormal image.</ion-text>
-            <ion-text>We are sad to say that the uploaded image is covid infected.</ion-text>
+            <ion-text color="primary" *ngIf="pred && pred[0]==1">Congratulation! Uploaded image is a normal image, without any covid infection.</ion-text>
+            <ion-text color="danger" *ngIf="pred && pred[1]==1">We are sad to say that the uploaded image is covid infected.</ion-text>
           </ion-item>
         </ion-col>
       </ion-row>

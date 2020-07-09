@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +12,9 @@ export class HomePage {
   model: any;
   loading: boolean;
   imgSrc: '';
+  pred: [];
 
-  constructor(public loadingController: LoadingController) { }
+  constructor(public loadingController: LoadingController, public toastController: ToastController) { }
 
   async ngOnInit() {
     this.loading = true;
@@ -21,8 +22,19 @@ export class HomePage {
       message: 'Loading Model...',
     });
     await loading.present();
-    this.model = await tf.loadLayersModel('assets/model.json');
+    this.model = await tf.loadLayersModel('assets/model/model.json');
+    this.presentToast('Model Loaded Succesfully!', "success");
     await loading.dismiss();
+  }
+
+  // function to call toast.
+  async presentToast(message, color) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color
+    });
+    toast.present();
   }
 
   async fileChange(event) {
@@ -37,16 +49,24 @@ export class HomePage {
         // console.log(this.imgSrc);
         setTimeout(async () => {
         	let image = <HTMLImageElement> document.getElementById("imge");
-        console.log(image);
-        let tensor = tf.browser.fromPixels(image)
-    .resizeNearestNeighbor([224, 224])
-    .toFloat()
-    .expandDims();
-    console.log(tensor);
-        const pred = await this.model.predict(this.preprocess(image));
+        // console.log(image);
+    //     let tensor = tf.browser.fromPixels(image)
+    // .resizeNearestNeighbor([224, 224])
+    // .toFloat()
+    // .expandDims();
+    // console.log(tensor);
+        this.loading = true;
+        const loading = await this.loadingController.create({
+          message: 'Loading Result...',
+        });
+        await loading.present();
+        this.pred = await this.model.predict(this.preprocess(image)).dataSync();
+        await loading.dismiss();
+        // const pred1 = await this.model.predict(this.preprocess(image)).argmax(1);
         // const pred = await this.model.predict(tensor).dataSync();
-        console.log(pred);
-    }, 1000);
+        // console.log(pred);
+        // console.log(pred1);
+    }, 100);
         
         // const pred = await this.model.classify(this.preprocess(image));
         // console.log(pred);
