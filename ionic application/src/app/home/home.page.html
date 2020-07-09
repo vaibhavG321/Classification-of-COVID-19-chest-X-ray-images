@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Covid Classification
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Covid Classification</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <!-- <strong>Ready to create an app?</strong>
+    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p> -->
+    <!-- <div class="cont d-flex justify-content-center align-items-center flex-column"> -->
+    <ion-card class="inventory-card">
+      <ion-card-content>
+      <ion-item align-self-center>
+          <!-- <input type="file" class="custom-file-input" (change)="fileChange($event)">
+          <label class="custom-file-label">Select File</label> -->
+          <!-- <label color="primary" type="button"><input style="display: none;" type="file" (change)="fileChange($event)"><ion-button>Upload Image</ion-button></label> -->
+          <label style="border: 1px solid blue; background: blue; padding: 8px 5px; color: white;" type="button"><input id="image" style="display: none;" type="file" (change)="fileChange($event)">Upload Image</label>
+      </ion-item>
+
+      <!-- <div *ngIf="loading">
+          <img src="./assets/loading.gif">
+      </div> -->
+      <ion-row>
+        <ion-col size-xs="12" size-sm="6">
+          <ion-item align-self-center *ngIf="imgSrc">
+            <img id="imge" src="{{imgSrc}}" />
+          </ion-item>
+        </ion-col>
+        <ion-col size-xs="12" size-sm="6">
+          <ion-item align-self-center *ngIf="imgSrc">
+            <!-- <ion-img style="height: 400px; width: 300px;" src="{{imgSrc}}"></ion-img> -->
+            <ion-text>Congratulation! Uploaded image is a mormal image.</ion-text>
+            <ion-text>We are sad to say that the uploaded image is covid infected.</ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    <!-- </div> -->
+  </ion-card-content>
+</ion-card>
+  </ion-grid>
+</ion-content>
