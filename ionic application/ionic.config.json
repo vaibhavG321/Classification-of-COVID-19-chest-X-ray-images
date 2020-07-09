@@ -1,5 +1,7 @@
 {
-  "name": "covidApp1",
-  "integrations": {},
+  "name": "Covid Tester",
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
